@@ -1,18 +1,17 @@
 package model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import model.entities.Departamento;
+import model.dao.DepartamentoDao;
+import model.dao.FactorDao;
+import model.entidades.Departamento;
 
 public class DepartamentoService {
+	
+	private DepartamentoDao dao = FactorDao.criadorDepartamentoDAO();
+	
 	public List<Departamento> findAll(){
-		List<Departamento> list = new ArrayList<>();
-		list.add(new Departamento(1,"Books"));
-		list.add(new Departamento(1,"Cars"));
-		list.add(new Departamento(1,"Foods"));
-		list.add(new Departamento(1,"Sports"));
-		return list;
+		return dao.procureTodos();
 		
 	}
 }
