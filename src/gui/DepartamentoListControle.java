@@ -47,8 +47,8 @@ public class DepartamentoListControle implements Initializable{
 	
 	@FXML
 	public void onButtonNew(ActionEvent event) {
-		Stage parentStage = Utils.currentStage(event);
-		createDialogoForm("/gui/DepartamentoForm.fxml", parentStage);
+		Stage parenStage = Utils.currentStage(event);
+		createDialogoForm("/gui/DepartamentoForm.fxml", parenStage);
 	}
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -79,11 +79,11 @@ public class DepartamentoListControle implements Initializable{
 	
 	public void createDialogoForm(String absoluteName, Stage parentStage) {
 		try {
-			FXMLLoader loader= new FXMLLoader(getClass().getResource(absoluteName));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
 			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Entre Dados Departamento");
+			dialogStage.setTitle("Enter com os Dados do Departamento");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
