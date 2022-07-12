@@ -8,8 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entidades.Departamento;
 
 public class DepartamentoFormControl implements Initializable {
+	
+	private Departamento entities;
 	
 	@FXML
 	private TextField txtId;
@@ -36,13 +39,21 @@ public class DepartamentoFormControl implements Initializable {
 		System.out.println("!!2!");
 	}
 	
-	
-	
+	public void setDepartamento(Departamento entities) {
+		this.entities = entities;
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+			
+	}
+	
+	public void updateFormData() {
+		if(entities == null) {
+			throw new IllegalStateException("Entities Null");
+		}
+		txtId.setText(String.valueOf(entities.getId()));
+		txtName.setText(entities.getNome());
 	}
 	
 	
