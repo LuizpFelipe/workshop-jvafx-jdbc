@@ -85,7 +85,9 @@ public class DepartamentoListControle implements Initializable{
 			
 			DepartamentoFormControl controller = loader.getController();
 			controller.setDepartamento(obj);
+			controller.setDeparmantoService(new DepartamentoService());
 			controller.updateFormData();
+			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter com os Dados do Departamento");
 			dialogStage.setScene(new Scene(pane));
