@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import model.entidades.Departamento;
 import model.service.DepartamentoService;
 
-public class DepartamentoListControle implements Initializable{
+public class DepartamentoListControle implements Initializable, DataChengeListener{
 	
 	private DepartamentoService service;
 	
@@ -86,6 +86,7 @@ public class DepartamentoListControle implements Initializable{
 			DepartamentoFormControl controller = loader.getController();
 			controller.setDepartamento(obj);
 			controller.setDeparmantoService(new DepartamentoService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -99,6 +100,11 @@ public class DepartamentoListControle implements Initializable{
 		}catch(IOException e) {
 			Alertas.showAlert("IO Exception", "Erro Load View", e.getMessage(), AlertType.ERROR);
 		}
+	}
+	
+	@Override
+	public void onDatachanged() {
+		uptadeTableView();
 	}
 
 }
