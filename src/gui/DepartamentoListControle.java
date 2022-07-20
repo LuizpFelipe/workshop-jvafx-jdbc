@@ -159,20 +159,20 @@ public class DepartamentoListControle implements Initializable, DataChengeListen
 		});
 	}
 
-	protected void removeEntity(Departamento obj) {
+	private void removeEntity(Departamento obj) {
 		Optional<ButtonType> result = Alertas.showConfirmation("Confirmação", "Tem certeza que quer Deletar?");
-		
-		if(result.get() == ButtonType.OK) {
-			if(service == null) {
+
+		if (result.get() == ButtonType.OK) {
+			if (service == null) {
 				throw new IllegalStateException("Service esta Null");
 			}
 			try {
 				service.remove(obj);
 				uptadeTableView();
-			}catch(DbIntegrityException e){
+			} catch (DbIntegrityException e) {
 				Alertas.showAlert("Erro ao remover Objeto", null, e.getMessage(), AlertType.ERROR);
 			}
-			
+
 		}
 	}
 
