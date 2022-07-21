@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -38,6 +39,17 @@ public class VendedorListControle implements Initializable, DataChengeListener {
 
 	@FXML
 	private TableColumn<Vendedor, String> tableColumnName;
+	
+	@FXML
+	private TableColumn<Vendedor, String> tableColumnEmail;
+	
+	@FXML
+	private TableColumn<Vendedor, Date> tableColumnBirthDate;
+	
+	@FXML
+	private TableColumn<Vendedor, Double> tableColumnBaseSalary;
+	
+	
 
 	@FXML
 	private TableColumn<Vendedor, Vendedor> tableColumnEDIT;
@@ -70,7 +82,11 @@ public class VendedorListControle implements Initializable, DataChengeListener {
 	private void initializeNode() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("nome"));
-
+		tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("dataAniversario"));
+		Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
+		tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalario"));
+		Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewVendedor.prefHeightProperty().bind(stage.heightProperty());
 	}
