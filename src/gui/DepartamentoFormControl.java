@@ -9,6 +9,7 @@ import java.util.Set;
 
 import db.DbException;
 import gui.util.Alertas;
+import gui.util.Constraints;
 import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -107,7 +108,12 @@ public class DepartamentoFormControl implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-			
+		initializeNodes();
+	}
+	
+	private void initializeNodes() {
+		Constraints.setTextFieldInteger(txtId);
+		Constraints.setTextFieldMaxLength(txtName, 70);
 	}
 	
 	public void updateFormData() {

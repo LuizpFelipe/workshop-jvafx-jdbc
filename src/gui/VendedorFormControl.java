@@ -1,20 +1,25 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 import db.DbException;
 import gui.util.Alertas;
+import gui.util.Constraints;
 import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entidades.Vendedor;
@@ -35,8 +40,26 @@ public class VendedorFormControl implements Initializable {
 	@FXML
 	private TextField txtName;
 	
+	@FXML
+	private TextField txtEmail;
+	
+	@FXML
+	private DatePicker dpBirthDate;
+	
+	@FXML
+	private  TextField txtBaseSalary;
+	
 	@FXML 
 	private Label labelErroName;
+	
+	@FXML 
+	private Label labelErroEmail;
+
+	@FXML 
+	private Label labelErroBirthDate;
+	
+	@FXML 
+	private Label labelErroBaseSalary;
 	
 	@FXML
 	private Button btSave;
@@ -106,8 +129,16 @@ public class VendedorFormControl implements Initializable {
 	}
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-			
+	public void initialize(URL url, ResourceBundle rb) {
+		initializeNodes();
+	}
+	
+	private void initializeNodes() {
+		Constraints.setTextFieldInteger(txtId);
+		Constraints.setTextFieldMaxLength(txtName, 70);
+		Constraints.setTextFieldMaxLength(txtEmail, 70);
+		Constraints.setTextFieldDouble(txtBaseSalary);
+		Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
 	}
 	
 	public void updateFormData() {
@@ -116,6 +147,13 @@ public class VendedorFormControl implements Initializable {
 		}
 		txtId.setText(String.valueOf(entities.getId()));
 		txtName.setText(entities.getNome());
+		txtEmail.setText(entities.getEmail());
+		Locale.setDefault(Locale.US);
+		txtBaseSalary.setText(String.format("%.2f", entities.getBaseSalario()));
+		if(entities.getDataAniversario() != null) {
+			dpBirthDate.setValue(LocalDate.ofInstant(entities.getDataAniversario().toInstant(), ZoneId.systemDefault()));
+		}
+		
 	}
 	
 	private void setErrorMensage(Map<String, String> errors) {
