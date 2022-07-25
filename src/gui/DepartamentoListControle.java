@@ -113,6 +113,7 @@ public class DepartamentoListControle implements Initializable, DataChengeListen
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
+			e.printStackTrace();
 			Alertas.showAlert("IO Exception", "Erro Load View", e.getMessage(), AlertType.ERROR);
 		}
 	}
